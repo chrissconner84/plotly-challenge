@@ -1,5 +1,5 @@
 //Set the path to the json file
-const path = "./samples.json";
+const path = "./data/samples.json";
 
 // Using D3 to get Promise Pending to the data
 const dataPromise = d3.json(path);
@@ -81,12 +81,16 @@ function getData() {
 //var xtest=samples.sample_values.sort(d3.descending).slice(0,10)
 var xtest=samples.sample_values.slice(0,10).reverse()
 var ytest=samples.otu_ids.slice(0,10).reverse()
+var hover_labels=samples.otu_labels.slice(0,10).reverse()
 ytest_strings=ytest.map(String)
 ytestnew=ytest_strings.map(i => `OTU ID `+ i);
 var wfreq_value=found.wfreq
 console.log(wfreq_value)
 
-var hover_labels=samples.otu_labels.slice(0,10).reverse()
+var bubble_labels=samples.otu_labels.reverse()
+var xbubble=samples.sample_values.reverse()
+var ybubble=samples.otu_ids.reverse()
+
 console.log("Sample values:", xtest)
 console.log("OTU IDs:",ytestnew)
 console.log("OUT Labels:",hover_labels)
@@ -126,12 +130,13 @@ console.log("OUT Labels:",hover_labels)
 
   // The bubble chart  
     var trace2 = {
-        x: xtest,
-        y: ytest,
-        text:hover_labels,
+        x: ybubble,
+        y: xbubble,
+        text:bubble_labels,
         mode: 'markers',
         marker: {
-        size: [10,20,30,40,50,60,70,80,90]
+        size: xbubble,
+        color:ybubble
         }
       };
       
